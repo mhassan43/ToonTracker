@@ -42,7 +42,6 @@ class home_fragment : Fragment() {
         recycler_today.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
         recycler_today.setHasFixedSize(true)
 
-
     }
 
     private fun getToons(){
