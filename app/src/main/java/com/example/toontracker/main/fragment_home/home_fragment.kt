@@ -1,6 +1,5 @@
 package com.example.toontracker.main.fragment_home
 
-import android.media.MediaPlayer
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -9,21 +8,18 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.toontracker.R
-import com.google.android.gms.tasks.OnCompleteListener
-import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.Query
-import com.google.firebase.firestore.QueryDocumentSnapshot
-import com.google.firebase.firestore.QuerySnapshot
-import com.google.firebase.ktx.Firebase
+import com.example.toontracker.main.classes.Data_class
+import com.example.toontracker.main.fragment_home.adapters.home_recycler_adapter
+import com.google.firebase.firestore.*
 import kotlinx.android.synthetic.main.fragment_home.*
+import java.time.LocalDateTime
+import kotlin.collections.ArrayList
 
 
 class home_fragment : Fragment() {
 
     private lateinit var database: FirebaseFirestore
-    private var db = FirebaseFirestore.getInstance()
-
-
+    private val today = ArrayList<Data_class>()
 
 
     override fun onCreateView(
@@ -39,38 +35,47 @@ class home_fragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val data = getToons()
+        //Get data for today's webtoons
+        getToons()
+        // for today's webtoons recylcer
+        recycler_today.adapter = home_recycler_adapter(today)
+        recycler_today.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
+        recycler_today.setHasFixedSize(true)
 
-        recycler_home.adapter = home_recycler_adapter(data)
-        recycler_home.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
-        recycler_home.setHasFixedSize(true)
+
     }
 
-    private fun getToons() : List<data_class>{
-        val list = ArrayList<data_class>()
+    private fun getToons(){
 
+        val dayOfWeek = getWeekDay()
+        database = FirebaseFirestore.getInstance()
+        val toonRef = database.collection("toons")
 
-        return list
-    }
+        val query = toonRef.whereEqualTo("date", dayOfWeek)
 
-    /*
-    private fun generateDummyList(size: Int): List<data_class> {
-
-        val list = ArrayList<data_class>()
-
-        for (i in 0 until size) {
-            val drawable = when (i % 3) {
-                0 -> R.drawable.unnamed
-                else ->  R.drawable.unnamed
+        query
+            .get()
+            .addOnSuccessListener { documents ->
+                for (document in documents) {
+                    today += Data_class(document.id, document.data.getValue("title") as String)
+                    if(documents.size() == today.size){
+                        recycler_today.adapter?.notifyDataSetChanged()
+                    }
+                }
             }
-            val item = data_class(drawable)
-            list += item
-        }
+            .addOnFailureListener { exception ->
+                Log.d("home", "Error getting documents: ", exception)
+            }
 
-        return list
     }
 
-     */
+    private fun getWeekDay() : String {
+        var date = LocalDateTime.now().dayOfWeek.toString().toLowerCase()
+        return date
+    }
+
+
+
 
 
 }

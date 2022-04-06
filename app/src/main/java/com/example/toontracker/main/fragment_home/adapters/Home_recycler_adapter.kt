@@ -1,35 +1,44 @@
-package com.example.toontracker.main.fragment_home
+package com.example.toontracker.main.fragment_home.adapters
 
-import android.media.Image
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.appcompat.view.menu.MenuView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.toontracker.R
+import com.example.toontracker.main.classes.Data_class
 import kotlinx.android.synthetic.main.list_items.view.*
-import java.nio.file.attribute.UserDefinedFileAttributeView
 
-class home_recycler_adapter(private val data: List<data_class> ) : RecyclerView.Adapter<home_recycler_adapter.TestViewHolder>() {
+class home_recycler_adapter(private val data: List<Data_class>) : RecyclerView.Adapter<home_recycler_adapter.TestViewHolder>() {
+    private lateinit var context: Context
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TestViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.list_items,
-        parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(
+            R.layout.list_items,
+            parent, false
+        )
+        context=parent.context;
 
         return TestViewHolder(view)
     }
 
 
     override fun onBindViewHolder(holder: TestViewHolder, position: Int) {
-        val curItem : data_class = data[position]
+        val curItem : Data_class = data[position]
 
         val imgId =  "https://firebasestorage.googleapis.com/v0/b/toontracker-b5102.appspot.com/o/" + curItem.id + "?alt=media&token="
         //holder.imageView.setImageResource(imgId)
 
-        holder.textView.text = curItem.title
+        Glide.with(context)
+            .load(imgId)
+            .fitCenter()
+            .into(holder.imageView)
 
+        holder.textView.text = curItem.title
     }
 
     override fun getItemCount() = data.size
@@ -39,6 +48,5 @@ class home_recycler_adapter(private val data: List<data_class> ) : RecyclerView.
         val imageView: ImageView = itemView.cover
         val textView: TextView = itemView.title
     }
-
 
 }
