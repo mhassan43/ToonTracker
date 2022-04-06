@@ -1,12 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content" android:layout_height="wrap_content"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:padding="8dp">
+
     <ImageView
+        android:id="@+id/cover"
         android:layout_width="90dp"
         android:layout_height="90dp"
-        android:id="@+id/cover"
-        android:scaleType="fitXY"
-        android:src="@drawable/unnamed"/>
+        android:layout_margin="5dp"
 
-</RelativeLayout>
+        android:scaleType="fitXY"
+
+        app:layout_constraintBaseline_toTopOf="parent"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="8dp" />
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+
+        android:gravity="center"
+        android:text="sadasdsads aasdsad"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cover" />
+
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
