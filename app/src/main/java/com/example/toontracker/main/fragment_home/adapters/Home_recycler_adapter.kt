@@ -42,10 +42,8 @@ class home_recycler_adapter(
         //get only dates that show today and put into new array
         for (books in data){
             Log.d("home","${books.reDate}")
+
         }
-
-
-
 
         // check if the array is bigger den 1 if it
         // is show the recycler view and populate it with the array
