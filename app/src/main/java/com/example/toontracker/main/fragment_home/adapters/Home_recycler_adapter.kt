@@ -46,6 +46,7 @@ class home_recycler_adapter(
 
 
 
+
         // check if the array is bigger den 1 if it
         // is show the recycler view and populate it with the array
 
