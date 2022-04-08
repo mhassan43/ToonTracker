@@ -44,7 +44,7 @@ class home_fragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        dbCalls()
+        getToons()
 
         //Log.d("home","${weekdays.size}")
         recycler_today.layoutManager = LinearLayoutManager(context);
@@ -55,25 +55,6 @@ class home_fragment : Fragment() {
 
     }
 
-    private fun dbCalls() {
-        getToons()
-
-
-        /*
-        for (i in 0..6){
-
-            val increment = i.toLong()
-
-            var date = LocalDateTime.now().dayOfWeek.plus(increment)
-                .toString().toLowerCase()
-
-            weekdays+=date
-
-        }
-
-         */
-
-    }
 
 
     private fun getToons(){
@@ -99,11 +80,8 @@ class home_fragment : Fragment() {
                             weekdays+=document.data.getValue("date",) as String
                         }
                         if(documents.size() == today.size){
-                            Log.d("home","$today")
-                            recycler_today.adapter = home_recycler_adapter(today,weekdays.size)
+                            recycler_today.adapter = home_recycler_adapter(today,weekdays)
                         }
-
-                    Log.d("home"," $ date in call ${document.data.getValue("title")} \n\n")
 
                 }
             }

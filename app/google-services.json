@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "407039269020",
+    "firebase_url": "https://toontracker-b5102-default-rtdb.firebaseio.com",
+    "project_id": "toontracker-b5102",
+    "storage_bucket": "toontracker-b5102.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:407039269020:android:c63c5c31c25b99f4247559",
+        "android_client_info": {
+          "package_name": "com.example.toontracker"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "407039269020-9e6kp1t1hk7767j90bjs8kr14uscmilh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD5eNuWuqK3H9W0HyDZKx7oovGF7qf1otg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "407039269020-9e6kp1t1hk7767j90bjs8kr14uscmilh.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "407039269020-156tknj2jqmgv2no5juhj8h8rs59653o.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "app.mayven.ToonTracker"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -15,10 +15,9 @@ import kotlinx.android.synthetic.main.list_items.view.*
 
 class home_recycler_adapter(
     private val data: ArrayList<Data_class>,
-    private val size: Int
+    private val weekday: Array<String>
 ) : RecyclerView.Adapter<home_recycler_adapter.TestViewHolder>() {
     private lateinit var context: Context
-    private var count = 0
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TestViewHolder {
@@ -33,13 +32,30 @@ class home_recycler_adapter(
 
 
     override fun onBindViewHolder(holder: TestViewHolder, position: Int) {
+        var booksToShow = ArrayList<Data_class>()
 
         //val cur : java.util.ArrayList<Data_class> = data[position]
 
-        val curItem : Data_class = data[position]
+        //set weekday
+        holder.weekday.text = weekday[position]
+
+        //get only dates that show today and put into new array
+        for (books in data){
+            Log.d("home","${books.reDate}")
+        }
 
 
-        Log.d("home", "${data.size}")
+
+        // check if the array is bigger den 1 if it
+        // is show the recycler view and populate it with the array
+
+
+
+
+
+
+
+        /*
 
             val imgId =
                 "https://firebasestorage.googleapis.com/v0/b/toontracker-b5102.appspot.com/o/" + curItem.id + "?alt=media&token="
@@ -52,15 +68,19 @@ class home_recycler_adapter(
 
             holder.textView.text = curItem.title
 
+         */
+
+
 
 
     }
 
-    override fun getItemCount() = size
+    override fun getItemCount() = weekday.size
 
     class TestViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val imageView: ImageView = itemView.cover
         val textView: TextView = itemView.title
+        val weekday: TextView = itemView.weekday
     }
 
 }
