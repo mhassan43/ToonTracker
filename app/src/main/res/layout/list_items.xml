@@ -4,35 +4,69 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:padding="8dp">
-
-    <ImageView
-        android:id="@+id/cover"
-        android:layout_width="130dp"
-        android:layout_height="150dp"
-        android:layout_margin="5dp"
-
-        android:scaleType="fitXY"
-
-        app:layout_constraintBaseline_toTopOf="parent"
-
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="8dp" />
+    android:padding="8dp"
+    android:orientation="vertical"
+    >
 
     <TextView
-        android:id="@+id/title"
-        android:layout_width="100dp"
+        android:id="@+id/weekday"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-
+        android:text="today"
         android:gravity="center"
-        android:text="sadasdsads aasdsad"
+        android:textSize="50sp"/>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
 
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cover" />
+        app:layout_constraintTop_toBottomOf="@+id/weekday">
+
+        <ImageView
+            android:id="@+id/cover"
+            android:layout_width="130dp"
+            android:layout_height="150dp"
+            android:layout_margin="5dp"
+
+            android:scaleType="fitXY"
+
+            app:layout_constraintBaseline_toTopOf="parent"
+
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+             />
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+
+            android:gravity="center"
+            android:text="sadasdsads aasdsad"
+
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cover" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/childRecycler"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="05dp"
+        android:visibility="gone"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        />
+
 
 
 
