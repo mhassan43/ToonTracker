@@ -13,6 +13,8 @@ import com.example.toontracker.main.classes.Data_class
 import com.example.toontracker.main.fragment_home.adapters.home_recycler_adapter
 import com.google.firebase.firestore.*
 import kotlinx.android.synthetic.main.fragment_home.*
+import java.time.LocalDateTime
+import java.util.*
 import kotlin.collections.ArrayList
 
 interface ResultListener {
@@ -28,7 +30,6 @@ class home_fragment : Fragment() {
     private var weekdays = arrayOf<String>()
 
     private var count: Int = 0
-
 
 
     override fun onCreateView(
@@ -48,7 +49,7 @@ class home_fragment : Fragment() {
 
         //Log.d("home","${weekdays.size}")
         recycler_today.layoutManager = LinearLayoutManager(context);
-        val divider = DividerItemDecoration(context,DividerItemDecoration.VERTICAL)
+        val divider = DividerItemDecoration(context, DividerItemDecoration.VERTICAL)
         recycler_today.addItemDecoration(divider)
 
         recycler_today.setHasFixedSize(true)
@@ -56,8 +57,7 @@ class home_fragment : Fragment() {
     }
 
 
-
-    private fun getToons(){
+    private fun getToons() {
         database = FirebaseFirestore.getInstance()
         val toonRef = database.collection("toons")
 
@@ -67,21 +67,26 @@ class home_fragment : Fragment() {
             .get()
             .addOnSuccessListener { documents ->
                 for (document in documents) {
-                        today += Data_class(
-                            document.id,
-                            document.data.getValue("title",) as String,
-                            document.data.getValue("status",) as String,
-                            //document.data.getValue("description",) as String
-                            "",
-                            document.data.getValue("date",) as String,
-                            )
+                    today += Data_class(
+                        document.id,
+                        document.data.getValue("title") as String,
+                        document.data.getValue("status") as String,
+                        //document.data.getValue("description",) as String
+                        "",
+                        document.data.getValue("date") as String,
+                    )
 
-                        if(!weekdays.contains(document.data.getValue("date",) as String) ){
-                            weekdays+=document.data.getValue("date",) as String
-                        }
-                        if(documents.size() == today.size){
-                            recycler_today.adapter = home_recycler_adapter(today,weekdays)
-                        }
+                    if (!weekdays.contains(document.data.getValue("date") as String)) {
+                        weekdays += document.data.getValue("date") as String
+                    }
+                    if (documents.size() == today.size) {
+                        val current = LocalDateTime.now().dayOfWeek.toString().toLowerCase()
+                        var firstPart = weekdays.copyOfRange(weekdays.indexOf(current),weekdays.size)
+                        val secondPart = weekdays.copyOfRange(0,weekdays.indexOf(current))
+                        var mergedArray = firstPart.plus(secondPart)
+
+                        recycler_today.adapter = home_recycler_adapter(today, mergedArray)
+                    }
 
                 }
             }
@@ -91,9 +96,9 @@ class home_fragment : Fragment() {
 
     }
 
-
-
-
+    fun concatenate(a: ArrayList<String>, b: ArrayList<String>): List<String> {
+        return a + b
+    }
 
 
 }
